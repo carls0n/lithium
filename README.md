@@ -8,6 +8,8 @@ Move to lithium directory
 ```
 cd lithium
 ```
+
+Open lithium.c and customize configuration<br><br>
 Next, compile lithium.
 ```
 gcc -fPIC -shared -o lithium.so lithium.c -ldl
