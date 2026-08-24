@@ -18,9 +18,13 @@ Move shared library
 ```
 sudo cp lithium.so /usr/local/lib/
 ```
-And finally, install
+Next, install lithium
 ```
 echo /usr/local/lib/lithium.so | sudo tee /etc/ld.so.preload
+```
+Finally, create blank dummy file
+```
+sudo touch /etc/ld.so.preload.dummy
 ```
 
 To uninstall
