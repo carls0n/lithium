@@ -22,7 +22,7 @@ Next, install lithium
 ```
 echo /usr/local/lib/lithium.so | sudo tee /etc/ld.so.preload
 ```
-Finally, create blank dummy file
+Finally, create blank dummy file (redirect cat /etc/ld.so.preload to /etc/ld.so.preload.dummy)
 ```
 sudo touch /etc/ld.so.preload.dummy
 ```
