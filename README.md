@@ -4,6 +4,10 @@ Clone repository
 ```
 git clone https://github.com/carls0n/lithium
 ```
+Move to lithium directory
+```
+cd lithium
+```
 Next, compile lithium.
 ```
 gcc -fPIC -shared -o lithium.so lithium.c -ldl
