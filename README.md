@@ -27,7 +27,7 @@ Finally, create blank dummy file
 sudo touch /etc/ld.so.preload.dummy
 ```
 
-To uninstall
+Compile lithium-uninstall
 ```
 gcc -static -o lithium-uninstall lithium-uninstall.c
 ```
