@@ -5,6 +5,7 @@
 #include <dlfcn.h>
 #include <errno.h>
 
+#define TARGET_NEEDLE "lithium.so"
 #define NEEDLE_LEN 10
 
 /* --- 1. Core Parsing Logic --- */
